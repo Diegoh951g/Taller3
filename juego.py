@@ -109,14 +109,22 @@ def showUserProfile(game_system, user):
         if option == 1:
             showUserCreatudex(game_system, user)
 
-        if option == 2:
+        elif option == 2:
             game_system.showUserFightingTeam(user[0])
 
         elif option == 3:
             expedition(game_system, user)
 
+        elif option == 4:
+            fight(game_system, user[0])
+
         else:
             close = True
+
+def fight(game_system, username):
+
+    opponent = game_system.getOpponentTo(username)
+    print(opponent)
 
 def showUserCreatudex(game_system, user):
     species = game_system.getRegisteredSpecies(user[0])

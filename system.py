@@ -114,6 +114,12 @@ class System:
         self.db_cursor.execute("select tipo.nombre from especie inner join tipo on especie.id_tipo1 = tipo.id_tipo or especie.id_tipo2 = tipo.id_tipo where especie.id_especie = " + str(specie_id))
         return self.db_cursor.fetchall()
 
+    def getOpponentTo(self, username):
+        self.db_cursor.execute("select * from entrenador where entrenador.username != '" + username + "'")
+        opponents = self.db_cursor.fetchall()
+
+        return opponents[randint(0, len(opponents) - 1)]
+
     def showUserFightingTeam(self, username):
         
         query = "select especie.nombre_especie, monstruo.velocidad, monstruo.puntos_salud, monstruo.posicion_equipo, nombre_ataque1, nombre_ataque2, nombre_ataque3, nombre_ataque4 from monstruo inner join equipo_lucha on monstruo.id_equipo = equipo_lucha.id_equipo inner join especie on monstruo.id_especie = especie.id_especie where equipo_lucha.username_entrenador = '" + username + "'"
